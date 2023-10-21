@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link href="reset.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
   <script src="script.js" defer></script>
@@ -10,7 +13,11 @@
 </head>
 <body>
   <h1>Tic Tac Toe</h1>
-  <dialog>
+  <dialog id="gameVersion">
+    <button id="pvpBtn">Player vs Player</button>
+    <button id="pvcBtn">Player vs Computer</button>
+  </dialog>
+  <dialog id="pvpGame">
     <div>
       <h2>Enter your name</h2>
       <form class="players">
@@ -25,17 +32,35 @@
       </form>
     </div>
     <div>
-      <button id="start">Start game</button>
+      <button id="startPVP" class="spin circle" title="Play">Play</button>
     </div>
   </dialog>
-  <div id="gameInfo">
+  <dialog id="pvcGame">
+    <div>
+      <h2>Choose your marker and enter your name</h2>
+      <form class="players">
+        <span>
+          <button id="x" class="markerBtn">X</button>
+          <button id="o" class="markerBtn">O</button>
+        </span>
+        <input type="text" placeholder="Player name">
+      </form>
+    </div>
+    <button id="startPVC" class="spin circle" title="Play">Play</button>
+  </dialog>
+  <div id="gameInfo"></div>
+  <div id="cup" class="hidden">
+    <img src="" id="cupImg">
   </div>
-  <div id="gameBoard">
-  
-  </div>
+  <div id="gameBoard"></div>
   <div>
-    <button id="restart">Restart</button>
-
+    <button id="restart" class="spin circle" title="Play again">
+      <div class="svgContainer">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50">
+          <path d="M 25 2 A 1.0001 1.0001 0 1 0 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 18.307314 7.130711 12.364806 12 8.5195312 L 12 15 A 1.0001 1.0001 0 1 0 14 15 L 14 6.5507812 L 14 5 L 4 5 A 1.0001 1.0001 0 1 0 4 7 L 10.699219 7 C 5.4020866 11.214814 2 17.712204 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z"></path>
+          </svg>
+      </div>
+    </button>
   </div>
 </body>
 </html>

@@ -1,7 +1,10 @@
 :root {
-  --cell-size: 20vh;
-  --clr-btn: ;
-  --clr-bg: rgba(123, 224, 171, 0.5);
+  --cell-size: min(19vh, 19vw);
+  --clr-dark: rgb(22, 41, 31);
+  --clr-bg: rgb(123, 224, 171, 0.4);
+  --clr-accent: rgb(85, 112, 45);
+  --main-font: 'Chakra Petch', sans-serif;
+  --box-shadow: min(5px, 1vw) min(5px, 1vw) 5px var(--clr-dark);
 }
 
 body {
@@ -9,24 +12,47 @@ body {
   flex-flow: column;
   align-items: center;
   background: var(--clr-bg);
+  gap: clamp(10px, 2vh, 2rem);
+  font-family: var(--main-font);
+  color: var(--clr-dark);
+  text-shadow: 1px 0px 1px var(--clr-dark);
 }
 
 h1 {
   font-size: clamp(12px, 7vw, 10rem);
+  font-weight: 700;
+  text-shadow: min(5px, 1vw) min(5px, 1vw) 5px var(--clr-dark);
 }
 
 #gameInfo {
   font-size: clamp(10px, 4vw, 2.5rem);
 }
 
+.hidden {
+  display: none;
+}
+
+.show {
+  display: contents;
+  position: relative;
+}
+
+.show img {
+  position: absolute;
+  top: min(20vh, 20vw);
+  width: min(50vh, 50vw);
+}
+
 td {
   border: 2px solid var(--clr-bg);
+  border-radius: 10px;
   background: whitesmoke;
   width: var(--cell-size);
   height: var(--cell-size);
   text-align: center;
   vertical-align: middle;
   font-size: clamp(10px, 4vw, 2.5rem);
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 dialog:modal {
@@ -39,19 +65,182 @@ dialog:modal {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  font-size: min(3vh, 3vw);
 }
 
-#start, #restart {
-  background: rgb(115, 125, 115);
-  color: aliceblue;
-  border: 1px solid black;
-  height: 20vh;
-  width: 20vh;
+h2 {
+  font-weight: 700;
+}
+
+dialog > div,
+.players {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+input {
+  padding: 5px;
+  width: min(250px,60vw);
+  border: none;
+  border-radius: 5px;
+  font-family: var(--main-font);
+  font-size: min(3vh, 3vw);
+  font-weight: 500;
+  box-shadow: var(--box-shadow);
+  background: whitesmoke;
+}
+
+#pvpBtn, #pvcBtn {
+  background: linear-gradient(var(--clr-accent) 0%, var(--clr-dark) 50%, var(--clr-accent) 100%);
+  width: min(40vh, 40vw);
+  border: none;
+  padding: min(20px, 5vw);
   border-radius: 100px;
-  font-size: ;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  font-family: var(--main-font);
+  color: whitesmoke;
+  font-size: min(3vh, 3vw);
+  font-weight: 600;
+}
+
+#pvcBtn {
+  display: none; /*hidden while feature in development*/
+}
+
+.markerBtn {
+  background: radial-gradient(var(--clr-dark) 35%, var(--clr-accent) 50%, var(--clr-dark) 80%);
+  border: none;
+  height: min(6vh, 6vw);
+  width: min(6vh, 6vw);
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  font-family: var(--main-font);
+  color: whitesmoke;
+  font-size: min(3vh, 3vw);
+  font-weight: 600;
+}
+
+#startPVP, #startPVC, #restart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: min(20px, 5vw);
+  height: min(12vh, 12vw);
+  width: min(12vh, 12vw);
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+
+#startPVP, #startPVC {
+  background: radial-gradient(var(--clr-dark) 35%, var(--clr-accent) 50%, var(--clr-dark) 80%);
+  font-family: var(--main-font);
+  color: whitesmoke;
+  font-size: min(3vh, 3vw);
+  font-weight: 600;
 }
 
 #restart {
   visibility: hidden;
+  background: radial-gradient(var(--clr-dark) 10%, var(--clr-accent) 50%, var(--clr-dark) 80%);
+}
+
+svg {
+  fill: whitesmoke;
+  width: min(8vh, 8vw);
+  height: min(8vh, 8vw);
+  vertical-align: middle;
+  transition: transform 0.5s ease-in-out;
+}
+
+button {
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+}
+
+input:focus {
+  outline: none;
+}
+
+td:hover,
+td:focus {
+  background: radial-gradient(var(--clr-bg) 0%, whitesmoke 100%);
+  cursor: pointer;
+}
+
+td:not(:empty):hover {
+  background: whitesmoke;
+  cursor: not-allowed;
+}
+
+#restart:hover svg,
+#restart:focus svg {
+  transform: scale(0.8);
+}
+
+button:focus,
+button:hover {
+  outline: none;
+  transform: scale(1.1);
+}
+
+button::before,
+button::after {
+  box-sizing: inherit;
+  content: '';
+  position: absolute;
+  width: calc(100% - min(3vh, 3vw));
+  height: calc(100% - min(3vh, 3vw));
+}
+
+.spin {
+  height: 200px;
+  width: 200px;
+}
+
+.spin::before,
+.spin::after {
+  top: min(1.5vh, 1.5vw);
+  left: min(1.5vh, 1.5vw);
+}
+
+.spin::before {
+  border: min(2px, 0.3vw) solid transparent;
+}
+
+.spin:hover::before,
+.spin:focus::before {
+  border-top-color: whitesmoke;
+  border-right-color: whitesmoke;
+  border-bottom-color: whitesmoke;
+  transition: border-top-color 0.15s linear, border-right-color 0.15s linear 0.10s, border-bottom-color 0.15s linear 0.25s;
+}
+
+.spin::after {
+  border: 0 solid transparent;
+}
+
+.spin:hover::after,
+.spin:focus::after {
+  border-top: min(2px, 0.3vw) solid whitesmoke;
+  border-left-width: min(2px, 0.3vw);
+  border-right-width: min(2px, 0.3vw);
+  transform: rotate(270deg);
+  transition: transform 0.45s linear 0s, border-left-width 0s linear 0.40s;
+}
+
+.circle {
+  border-radius: 100%;
+}
+
+.circle::before,
+.circle::after {
+  border-radius: 100%;
 }
 
